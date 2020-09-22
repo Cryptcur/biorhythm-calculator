@@ -35,7 +35,7 @@ function App() {
             onIonChange={ev => setBirthDate(ev.detail.value)}
           />
         </IonItem>
-        <BiorhythmCard targetDate={targetDate} />
+        <BiorhythmCard birthDate={birthDate} targetDate={targetDate} />
       </IonContent>
     </IonApp>
   );
