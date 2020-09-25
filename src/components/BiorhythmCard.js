@@ -6,6 +6,8 @@ import {
   IonCardTitle
 } from "@ionic/react";
 import { calculationBiorhythms } from "../calculations";
+import BiorhythmChart from "./BiorhythmChart";
+import "./BiorhythmCard.css";
 import React from "react";
 
 const formatDate = isoString => {
@@ -18,13 +20,16 @@ const BiorhythmCard = ({ birthDate, targetDate }) => {
     targetDate
   );
   return (
-    <IonCard className="ion-text-center">
+    <IonCard className="biorhythm-card ion-text-center">
       <IonCardHeader>
         <IonCardTitle>{formatDate(targetDate)}</IonCardTitle>
         <IonCardContent>
-          <p>Physical: {physical.toFixed(4)}</p>
-          <p>Emotional: {emotional.toFixed(4)}</p>
-          <p>Intellectual: {intellectual.toFixed(4)}</p>
+          <BiorhythmChart birthDate={birthDate} targetDate={targetDate} />
+          <p className="physical">Physical: {physical.toFixed(4)}</p>
+          <p className="emotional">Emotional: {emotional.toFixed(4)}</p>
+          <p className="intellectual">
+            Intellectual: {intellectual.toFixed(4)}
+          </p>
         </IonCardContent>
       </IonCardHeader>
     </IonCard>

@@ -4,21 +4,17 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonInput,
   IonLabel,
   IonItem,
-  IonDatetime,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent
+  IonDatetime
 } from "@ionic/react";
 import React, { useState } from "react";
 import BiorhythmCard from "./components/BiorhythmCard";
+import { useLocalStorage } from "./hooks";
 
 function App() {
-  const [birthDate, setBirthDate] = useState("2020-01-31");
-  const targetDate = new Date().toISOString();
+  const [birthDate, setBirthDate] = useLocalStorage("birthDate", "");
+  const [targetDate, setTargetDate] = useState(new Date().toISOString());
   return (
     <IonApp>
       <IonHeader>
@@ -27,15 +23,25 @@ function App() {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
+        {birthDate && (
+          <BiorhythmCard birthDate={birthDate} targetDate={targetDate} />
+        )}
         <IonItem>
-          <IonLabel position="stacked">Date of Birth:</IonLabel>
+          <IonLabel position="fixed">Date of Birth:</IonLabel>
           <IonDatetime
             displayFormat="D-MMM-YYYY"
             value={birthDate}
             onIonChange={ev => setBirthDate(ev.detail.value)}
           />
         </IonItem>
-        <BiorhythmCard birthDate={birthDate} targetDate={targetDate} />
+        <IonItem>
+          <IonLabel position="fixed">Target Date:</IonLabel>
+          <IonDatetime
+            displayFormat="D-MMM-YYYY"
+            value={targetDate}
+            onIonChange={ev => setTargetDate(ev.detail.value)}
+          />
+        </IonItem>
       </IonContent>
     </IonApp>
   );
